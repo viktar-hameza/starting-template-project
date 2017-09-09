@@ -1,0 +1,72 @@
+html,
+body {
+	height: 100%;
+	position: relative;
+}
+
+html {
+	padding: 0;
+	margin: 0;
+	font-size: $font-size-root;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+body {
+	min-height: 100%;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	font-family: $font;
+	font-size: $font-size;
+	background-color: $white;
+	@include font-smoothing(on);
+	text-rendering: optimizeLegibility;
+	font-smooth: always;
+}
+
+a {
+	color: $link;
+	text-decoration: none;
+	&:hover {
+		color: $link-hover;
+		text-decoration: underline;
+	}
+}
+
+p {
+	margin: 0;
+	& + p {
+		margin-top: 20px;
+	}
+}
+
+strong {
+	font-weight: $bold;
+}
+
+.dnone {
+	display: none;
+}
+
+.title-h2 {
+	padding: 0 0 45px;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.nolink {
+	text-decoration: none;
+	color: $text;
+	&:hover {
+		text-decoration: none;
+		color: $text;
+	}
+}
+
+/*Conatainer*/
+#container {
+	min-width: 1024px;
+	position: relative;
+	z-index: 10;
+}

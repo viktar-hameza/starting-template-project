@@ -1,0 +1,106 @@
+*, 
+*:before, 
+*:after {
+	-webkit-box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	box-sizing: inherit;
+}
+
+dl,
+dd,
+dt,
+ul,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+form,
+html,
+body {
+	margin:0;
+	padding:0;
+}
+
+html {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	line-height: 1;
+}
+
+img {
+	max-width: 100%;
+	border: 0;
+	vertical-align: top;
+}
+
+ol,
+ul {
+	list-style-type: none;
+}
+
+:focus {
+	outline: none;
+}
+:focus::-webkit-input-placeholder {
+	color: transparent
+}
+:focus::-moz-placeholder {
+	color: transparent
+}
+:focus:-moz-placeholder {
+	color: transparent
+}
+:focus:-ms-input-placeholder {
+	color: transparent
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+ins {
+	text-decoration: none;
+}
+
+input,
+textarea,
+select {
+	margin: 0;
+}
+
+figure {
+	padding: 0;
+	margin: 0;
+}
+
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"]>input[type="button"]::-moz-focus-inner {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+button {
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+}
+
+.dnone {
+	display: none;
+}

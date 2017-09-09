@@ -1,0 +1,33 @@
+meta(charset='utf-8')
+title=TITLE
+meta(name='viewport', content=VIEWPORT_CONTENT)
+meta(name='description', content=DESCRIPTION)
+meta(http-equiv="X-UA-Compatible", content="IE=edge")
+meta(name="imagetoolbar" content="no")
+meta(name="msthemecompatible", content="no")
+meta(name="cleartype", content="on")
+meta(name="HandheldFriendly", content="True")
+meta(name="format-detection", content="telephone=no")
+meta(name="format-detection", content="address=no")
+meta(name="apple-mobile-web-app-capable", content="yes")
+meta(name="apple-mobile-web-app-status-bar-style", content="black-translucent")
+	
+link(href='assets/images/favicon/favicon.ico', rel='shortcut icon', type="image/x-icon")
+link(href='assets/images/favicon/favicon.ico', rel='icon', type="image/x-icon")
+
+meta(name='apple-mobile-web-app-title', content=TITLE)
+meta(name='application-name', content=TITLE)
+
+meta(property='og:title', content=TITLE)
+meta(property='og:site_name', content=TITLE)
+meta(property='og:title', content=TITLE)
+meta(property='og:description', content=DESCRIPTION)
+
+link(href='assets/stylesheets/style.css', type='text/css', rel='stylesheet')
+
+!= "<!-- [if gte IE 9]"
+style.
+	.gradient {
+		filter: none;
+	}
+!= "![endif]-->"

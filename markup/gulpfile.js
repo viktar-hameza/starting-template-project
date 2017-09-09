@@ -1,0 +1,68 @@
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var jade = require('gulp-jade');
+var runSequence = require('run-sequence');
+
+// Sass
+gulp.task('sass', function () {
+	gulp.src('src/assets/stylesheets/*.scss')
+			.pipe(sass())
+		.pipe(gulp.dest('public/assets/stylesheets'));
+});
+
+// Jade
+gulp.task('jade', function(){
+	gulp.src('src/pages/*.jade')
+		.pipe(jade({
+			pretty: true
+		}))
+		.pipe(gulp.dest('public/'))
+});
+
+//Copy JS
+gulp.task('copyJs', function() {
+		gulp.src(['./src/assets/scripts/*vendor/**/*',
+							'./src/assets/scripts/*.js'])
+		.pipe(gulp.dest('public/assets/scripts/'));
+});
+
+// Copy Fonts
+gulp.task('copyFonts', function() {
+    gulp.src('src/resources/fonts/**/*')
+    gulp.src('src/resources/fonts/fonts/**/*')
+    .pipe(gulp.dest('public/assets/fonts/'));
+});
+
+// Copy Images
+gulp.task('copyImages', function() {
+		gulp.src('./src/resources/images/**/*')
+		.pipe(gulp.dest('public/assets/images/'));
+});
+
+// Copy temporary pictures
+gulp.task('copyTempPics', function() {
+		gulp.src('./src/resources/temp/**/*')
+		.pipe(gulp.dest('public/temp/'));
+});
+
+// Watch taskes
+gulp.task('watch', function() {
+	gulp.watch(['src/assets/stylesheets/*.scss',
+							'src/assets/stylesheets/**/*.scss',
+							'src/assets/stylesheets/**/**/*.scss',
+							'src/templates/**/*.scss'], ['sass']);
+	gulp.watch(['src/pages/*.jade',
+							'src/pages/**/*.jade',
+							'src/templates/**/*.jade',
+							'src/templates/**/*.html'], ['jade']);
+	gulp.watch(['src/resources/fonts/*.*', 'src/resources/fonts/**/*.*'], ['copyFonts']);
+	gulp.watch(['src/assets/scripts/*.*','src/assets/scripts/**/*.*'], ['copyJs']);
+	gulp.watch(['src/resources/images/*.*', 'src/resources/images/**/*.*'], ['copyImages']);
+	gulp.watch(['src/resources/temp/*.*', 'src/resources/temp/**/*.*'], ['copyTempPics']);
+});
+
+gulp.task('default', function(callback) {
+	runSequence( 
+		['sass', 'jade', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics', 'watch'],
+		callback);
+});

@@ -1,0 +1,38 @@
+/*Colors*/
+$black: #000;
+$white: #FFF;
+
+/*Links*/
+$link: $black;
+$link-hover: $black;
+
+/*Typography*/
+$font-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font: 'ProximaNova', $font-base;
+
+$font-size-root: 10px;
+$font-size: 1.5rem;
+
+$text: $black;
+
+$light: 300;
+$normal: 400;
+$semibold: 600;
+$bold: 700;
+
+/*Paths*/
+$font-img-path: '../images';
+
+/*Media-queries*/
+$M_X4S: 'screen and (max-width: 319px)'; // (srv)
+$M_X3S: 'screen and (max-width: 479px)'; // (srv)
+$M_X2S: 'screen and (max-width: 639px)'; // (srv)
+$M_XS: 'screen and (max-width: 767px)'; // phones
+$M_XSM: 'screen and (max-width: 869px)';
+$M_SM: 'screen and (max-width: 991px)'; // tablets
+$M_SMX: 'screen and (max-width: 1023px)';
+$M_SM2X: 'screen and (max-width: 1099px)';
+$M_SM3X: 'screen and (max-width: 1149px)';
+$M_MD: 'screen and (max-width: 1199px)'; // medium desktop
+$M_LG: 'screen and (min-width: 1200px)'; // large desktop
+$M_XLG: 'screen and (max-width: 1399px)'; // extra-large desktop
