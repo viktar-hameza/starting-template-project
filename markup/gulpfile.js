@@ -2,11 +2,18 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var pug = require('gulp-pug');
 var runSequence = require('run-sequence');
+var notify = require("gulp-notify");
 
 // Sass
 gulp.task('sass', function () {
 	return gulp.src('src/assets/stylesheets/*.scss')
 		.pipe(sass())
+		.on('error', notify.onError(function(err){
+			return {
+				title: 'Styles compilation error',
+				message: err.message
+			}
+		}))
 		.pipe(gulp.dest('public/assets/stylesheets'));
 });
 
@@ -15,6 +22,12 @@ gulp.task('pug', function() {
 	return gulp.src('src/pages/*.pug')
 		.pipe(pug({
 			pretty: true
+		}))
+		.on('error', notify.onError(function(err){
+			return {
+				title: 'Pug compilation error',
+				message: err.message
+			}
 		}))
 		.pipe(gulp.dest('public/'))
 });
