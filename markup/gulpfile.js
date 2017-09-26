@@ -1,19 +1,19 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var jade = require('gulp-jade');
+var pug = require('gulp-pug');
 var runSequence = require('run-sequence');
 
 // Sass
 gulp.task('sass', function () {
-	gulp.src('src/assets/stylesheets/*.scss')
-			.pipe(sass())
+	return gulp.src('src/assets/stylesheets/*.scss')
+		.pipe(sass())
 		.pipe(gulp.dest('public/assets/stylesheets'));
 });
 
-// Jade
-gulp.task('jade', function(){
-	gulp.src('src/pages/*.jade')
-		.pipe(jade({
+// Pug
+gulp.task('pug', function() {
+	return gulp.src('src/pages/*.pug')
+		.pipe(pug({
 			pretty: true
 		}))
 		.pipe(gulp.dest('public/'))
@@ -28,9 +28,9 @@ gulp.task('copyJs', function() {
 
 // Copy Fonts
 gulp.task('copyFonts', function() {
-    gulp.src('src/resources/fonts/**/*')
-    gulp.src('src/resources/fonts/fonts/**/*')
-    .pipe(gulp.dest('public/assets/fonts/'));
+		gulp.src('src/resources/fonts/**/*')
+		gulp.src('src/resources/fonts/fonts/**/*')
+		.pipe(gulp.dest('public/assets/fonts/'));
 });
 
 // Copy Images
@@ -51,10 +51,10 @@ gulp.task('watch', function() {
 							'src/assets/stylesheets/**/*.scss',
 							'src/assets/stylesheets/**/**/*.scss',
 							'src/templates/**/*.scss'], ['sass']);
-	gulp.watch(['src/pages/*.jade',
-							'src/pages/**/*.jade',
-							'src/templates/**/*.jade',
-							'src/templates/**/*.html'], ['jade']);
+	gulp.watch(['src/pages/*.pug',
+							'src/pages/**/*.pug',
+							'src/templates/**/*.pug',
+							'src/templates/**/*.html'], ['pug']);
 	gulp.watch(['src/resources/fonts/*.*', 'src/resources/fonts/**/*.*'], ['copyFonts']);
 	gulp.watch(['src/assets/scripts/*.*','src/assets/scripts/**/*.*'], ['copyJs']);
 	gulp.watch(['src/resources/images/*.*', 'src/resources/images/**/*.*'], ['copyImages']);
@@ -63,6 +63,6 @@ gulp.task('watch', function() {
 
 gulp.task('default', function(callback) {
 	runSequence( 
-		['sass', 'jade', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics', 'watch'],
+		['sass', 'pug', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics', 'watch'],
 		callback);
 });

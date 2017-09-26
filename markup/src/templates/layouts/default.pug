@@ -1,5 +1,6 @@
 doctype html
-include ../vendor/bemto
+include ../vendor/bemto/bemto.pug
+- set_bemto_settings({ modifier: '--' })
 
 block vars
 - var rootClasses = rootClasses || '';
