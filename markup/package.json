@@ -17,11 +17,15 @@
     "gulp-install": "^0.6.0"
   },
   "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "cssnano": "^3.10.0",
     "gulp": "^3.9.1",
     "gulp-notify": "^3.0.0",
+    "gulp-postcss": "^7.0.0",
     "gulp-pug": "^3.3.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
+    "postcss-inline-svg": "^3.0.0",
     "run-sequence": "^2.2.0"
   }
 }

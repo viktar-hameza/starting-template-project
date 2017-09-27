@@ -4,6 +4,10 @@ var pug = require('gulp-pug');
 var runSequence = require('run-sequence');
 var notify = require("gulp-notify");
 var sourcemaps = require('gulp-sourcemaps');
+var postcss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
+var inlinesvg = require('postcss-inline-svg');
+var cssnano = require('cssnano');
 
 // Styles
 gulp.task('styles', function () {
@@ -16,8 +20,21 @@ gulp.task('styles', function () {
 					message: err.message
 				}
 			}))
+			.pipe(postcss([
+				inlinesvg({removeFill: true })
+			]))
+			.pipe(postcss([autoprefixer({browsers: ['> 1%'], cascade: false})]))
 		.pipe(sourcemaps.write('./stylemaps'))
 		.pipe(gulp.dest('public/assets/stylesheets'));
+});
+
+// css minify
+gulp.task('cssnano', function () {
+  gulp.src('public/assets/stylesheets/*.css')
+    .pipe(postcss([
+      cssnano()
+    ]))
+    .pipe(gulp.dest('public/assets/stylesheets'));
 });
 
 // Pug
@@ -44,20 +61,19 @@ gulp.task('copyJs', function() {
 
 // Copy Fonts
 gulp.task('copyFonts', function() {
-		gulp.src('src/resources/fonts/**/*')
-		gulp.src('src/resources/fonts/fonts/**/*')
+		gulp.src('./src/assets/fonts/**/*')
 		.pipe(gulp.dest('public/assets/fonts/'));
 });
 
 // Copy Images
 gulp.task('copyImages', function() {
-		gulp.src('./src/resources/images/**/*')
+		gulp.src('./src/assets/images/**/*')
 		.pipe(gulp.dest('public/assets/images/'));
 });
 
 // Copy temporary pictures
 gulp.task('copyTempPics', function() {
-		gulp.src('./src/resources/temp/**/*')
+		gulp.src('./src/assets/temp/**/*')
 		.pipe(gulp.dest('public/temp/'));
 });
 
@@ -71,10 +87,10 @@ gulp.task('watch', function() {
 							'src/pages/**/*.pug',
 							'src/templates/**/*.pug',
 							'src/templates/**/*.html'], ['pug']);
-	gulp.watch(['src/resources/fonts/*.*', 'src/resources/fonts/**/*.*'], ['copyFonts']);
+	gulp.watch(['src/assets/fonts/*.*', 'src/assets/fonts/**/*.*'], ['copyFonts']);
 	gulp.watch(['src/assets/scripts/*.*','src/assets/scripts/**/*.*'], ['copyJs']);
-	gulp.watch(['src/resources/images/*.*', 'src/resources/images/**/*.*'], ['copyImages']);
-	gulp.watch(['src/resources/temp/*.*', 'src/resources/temp/**/*.*'], ['copyTempPics']);
+	gulp.watch(['src/assets/images/*.*', 'src/assets/images/**/*.*'], ['copyImages']);
+	gulp.watch(['src/assets/temp/*.*', 'src/assets/temp/**/*.*'], ['copyTempPics']);
 });
 
 gulp.task('default', function(callback) {

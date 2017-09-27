@@ -8,8 +8,6 @@
 *,
 *:before,
 *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
   box-sizing: inherit; }
 
 dl,
@@ -30,8 +28,6 @@ body {
   padding: 0; }
 
 html {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
