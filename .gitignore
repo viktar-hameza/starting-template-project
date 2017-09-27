@@ -1,3 +1,4 @@
+
 # Numerous always-ignore extensions
 *.bak
 *.diff
@@ -11,6 +12,8 @@
 *.swp
 *.vi
 *~
+*.css.map
+*.map
 
 # OS or Editor folders
 *.sublime-grunt.cache
