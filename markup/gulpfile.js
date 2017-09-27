@@ -3,17 +3,20 @@ var sass = require('gulp-sass');
 var pug = require('gulp-pug');
 var runSequence = require('run-sequence');
 var notify = require("gulp-notify");
+var sourcemaps = require('gulp-sourcemaps');
 
-// Sass
-gulp.task('sass', function () {
+// Styles
+gulp.task('styles', function () {
 	return gulp.src('src/assets/stylesheets/*.scss')
-		.pipe(sass())
-		.on('error', notify.onError(function(err){
-			return {
-				title: 'Styles compilation error',
-				message: err.message
-			}
-		}))
+		.pipe(sourcemaps.init())
+			.pipe(sass())
+			.on('error', notify.onError(function(err){
+				return {
+					title: 'Styles compilation error',
+					message: err.message
+				}
+			}))
+		.pipe(sourcemaps.write('./stylemaps'))
 		.pipe(gulp.dest('public/assets/stylesheets'));
 });
 
@@ -63,7 +66,7 @@ gulp.task('watch', function() {
 	gulp.watch(['src/assets/stylesheets/*.scss',
 							'src/assets/stylesheets/**/*.scss',
 							'src/assets/stylesheets/**/**/*.scss',
-							'src/templates/**/*.scss'], ['sass']);
+							'src/templates/**/*.scss'], ['styles']);
 	gulp.watch(['src/pages/*.pug',
 							'src/pages/**/*.pug',
 							'src/templates/**/*.pug',
@@ -76,6 +79,6 @@ gulp.task('watch', function() {
 
 gulp.task('default', function(callback) {
 	runSequence( 
-		['sass', 'pug', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics', 'watch'],
+		['styles', 'pug', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics', 'watch'],
 		callback);
 });
