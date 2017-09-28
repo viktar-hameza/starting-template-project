@@ -37,6 +37,7 @@ Use the modifier syntax BEM of Nicolas Gallagher (block__element--modifier)
 ```Pug
   +b.block1.--modifier
     +e.element1.--modifier1 Test
+```
 
 ```HTML
   <div class="block1 block1--modifier">
@@ -44,3 +45,4 @@ Use the modifier syntax BEM of Nicolas Gallagher (block__element--modifier)
       Test
     </div>
   </div>
+```
