@@ -8,6 +8,19 @@ var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var inlinesvg = require('postcss-inline-svg');
 var cssnano = require('cssnano');
+var browserSync = require('browser-sync');
+
+// Start browserSync server
+gulp.task('browser-sync', function() {
+	browserSync({
+			server: {
+				baseDir: 'public',
+			},
+			port: 2000,
+			open: true,
+			notify: false
+	});
+});
 
 // Styles
 gulp.task('styles', function () {
@@ -25,16 +38,17 @@ gulp.task('styles', function () {
 			]))
 			.pipe(postcss([autoprefixer({browsers: ['> 1%'], cascade: false})]))
 		.pipe(sourcemaps.write('./stylemaps'))
-		.pipe(gulp.dest('public/assets/stylesheets'));
+		.pipe(gulp.dest('public/assets/stylesheets'))
+		.pipe(browserSync.reload({stream: true}));
 });
 
 // css minify
 gulp.task('cssnano', function () {
-  gulp.src('public/assets/stylesheets/*.css')
-    .pipe(postcss([
-      cssnano()
-    ]))
-    .pipe(gulp.dest('public/assets/stylesheets'));
+	return gulp.src('public/assets/stylesheets/*.css')
+		.pipe(postcss([
+			cssnano()
+		]))
+		.pipe(gulp.dest('public/assets/stylesheets'));
 });
 
 // Pug
@@ -50,35 +64,36 @@ gulp.task('pug', function() {
 			}
 		}))
 		.pipe(gulp.dest('public/'))
+		// .pipe(browserSync.reload({stream: true}));
 });
 
 //Copy JS
 gulp.task('copyJs', function() {
-		gulp.src(['./src/assets/scripts/*vendor/**/*',
-							'./src/assets/scripts/*.js'])
+		return gulp.src(['./src/assets/scripts/*vendor/**/*',
+			'./src/assets/scripts/*.js'])
 		.pipe(gulp.dest('public/assets/scripts/'));
 });
 
 // Copy Fonts
 gulp.task('copyFonts', function() {
-		gulp.src('./src/assets/fonts/**/*')
+		return gulp.src('./src/assets/fonts/**/*')
 		.pipe(gulp.dest('public/assets/fonts/'));
 });
 
 // Copy Images
 gulp.task('copyImages', function() {
-		gulp.src('./src/assets/images/**/*')
+		return gulp.src('./src/assets/images/**/*')
 		.pipe(gulp.dest('public/assets/images/'));
 });
 
 // Copy temporary pictures
 gulp.task('copyTempPics', function() {
-		gulp.src('./src/assets/temp/**/*')
+		return gulp.src('./src/assets/temp/**/*')
 		.pipe(gulp.dest('public/temp/'));
 });
 
 // Watch taskes
-gulp.task('watch', function() {
+gulp.task('watch',['browser-sync'], function() {
 	gulp.watch(['src/assets/stylesheets/*.scss',
 							'src/assets/stylesheets/**/*.scss',
 							'src/assets/stylesheets/**/**/*.scss',

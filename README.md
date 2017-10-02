@@ -25,12 +25,12 @@ Builder has the following file structure:
 
 ## Fonts
 
-In the project, use the font format: woff,woff2
+In the project, use the font format: woff, woff2
 
 [**Online Font Converter**](https://onlinefontconverter.com/)
   
 ## Pug + Bemto
-Mixins for writing BEM-style code for Pug, more syntax [Bemto](https://github.com/kizu/bemto)
+Mixins for writing BEM-style code for [Pug](https://pugjs.org/), more syntax [Bemto](https://github.com/kizu/bemto)
 
 Use the modifier syntax BEM of Nicolas Gallagher (block__element--modifier)
 ```Pug

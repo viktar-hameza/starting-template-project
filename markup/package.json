@@ -1,7 +1,7 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "project-website",
+  "version": "1.0.0",
+  "description": "Poject-website",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,13 +11,14 @@
     "url": ""
   },
   "author": "",
-  "license": "",
+  "license": "ISC",
   "homepage": "",
   "dependencies": {
     "gulp-install": "^0.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
+    "browser-sync": "^2.18.13",
     "cssnano": "^3.10.0",
     "gulp": "^3.9.1",
     "gulp-notify": "^3.0.0",
