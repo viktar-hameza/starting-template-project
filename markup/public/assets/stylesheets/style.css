@@ -175,6 +175,18 @@ strong {
   position: relative;
   z-index: 10; }
 
+/*Sprite-svg*/
+.svg-icon {
+  display: inline-block; }
+
+.svg-icon-schedule-sub {
+  height: 15px;
+  width: 15px; }
+
+.svg-icon-vk {
+  height: 34px;
+  width: 34px; }
+
 /*Blocks*/
 
 /*# sourceMappingURL=stylemaps/style.css.map */
