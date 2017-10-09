@@ -1,13 +1,13 @@
 // ----------------------------------------------
 // Automatic generation, do not write scss
 // -------------------------------------------
-.svg-icon {
+.icon-svg {
   display: inline-block;
   // fill: currentColor;
 }
 
 {{#shapes}}
-.svg-icon-{{base}} {
+.icon-svg-{{base}} {
   height: {{height.inner}}px;
   width: {{width.inner}}px;
 }

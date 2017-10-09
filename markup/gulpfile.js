@@ -61,10 +61,10 @@ gulp.task('svg-sprite', function () {
     // remove all fill and style declarations in out shapes
     .pipe(cheerio({
       run: function ($) {
-        $('[fill]').removeAttr('fill');
-        $('[stroke]').removeAttr('stroke');
-        $('[defs]').removeAttr('defs');
-        $('[style]').removeAttr('style');
+        // $('[fill]').removeAttr('fill');
+        // $('[stroke]').removeAttr('stroke');
+        // $('[defs]').removeAttr('defs');
+        // $('[style]').removeAttr('style');
       },
       parserOptions: {xmlMode: true}
     }))
