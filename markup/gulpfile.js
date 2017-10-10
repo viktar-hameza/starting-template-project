@@ -39,7 +39,7 @@ let postCssPlugins = [
   svgo(),
   objectFitImages(),
   imageInliner({
-    assetPaths: ['src/assets/images/*'],
+    assetPaths: ['src/assets/images/img_to_bg/'],
     maxFileSize: 10240
   })
 ];
