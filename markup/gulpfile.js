@@ -9,6 +9,9 @@ const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const inlinesvg = require('postcss-inline-svg');
+const imageInliner = require('postcss-image-inliner');
+const svgo = require('postcss-svgo');
+const objectFitImages = require('postcss-object-fit-images');
 const cssnano = require('cssnano');
 const browserSync = require('browser-sync');
 
@@ -29,6 +32,18 @@ gulp.task('browser-sync', function() {
   });
 });
 
+// postcss plugins
+let postCssPlugins = [
+  autoprefixer({browsers: ['> 1%'], cascade: false}),
+  inlinesvg(),
+  svgo(),
+  objectFitImages(),
+  imageInliner({
+    assetPaths: ['src/assets/images/*'],
+    maxFileSize: 10240
+  })
+];
+
 // Styles
 gulp.task('styles', function () {
   return gulp.src('src/assets/stylesheets/*.scss')
@@ -40,10 +55,7 @@ gulp.task('styles', function () {
           message: err.message
         }
       }))
-      .pipe(postcss([
-        inlinesvg()
-      ]))
-      .pipe(postcss([autoprefixer({browsers: ['> 1%'], cascade: false})]))
+    .pipe(postcss(postCssPlugins))
     .pipe(sourcemaps.write('./stylemaps'))
     .pipe(gulp.dest('public/assets/stylesheets'))
     .pipe(browserSync.reload({stream: true}));
