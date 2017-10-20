@@ -104,6 +104,7 @@ gulp.task('svg-sprite', function () {
 
 // sprite png
 gulp.task('sprite', function() {
+
   var spriteData;
   spriteData = gulp.src('src/assets/images/sprite/*.png')
   .pipe(spritesmith({
@@ -113,9 +114,11 @@ gulp.task('sprite', function() {
     cssVarMap: function(sprite) {
       sprite.name = "s-" + sprite.name;
     },
+    imgPath: '../images/sprite.png'
   }));
   spriteData.img.pipe(gulp.dest('public/assets/images/'));
-  return spriteData.css.pipe(gulp.dest('src/assets/stylesheets/sprite'));
+  spriteData.css.pipe(gulp.dest('src/assets/stylesheets/sprite'));
+  return spriteData;
 });
 
 // css minify

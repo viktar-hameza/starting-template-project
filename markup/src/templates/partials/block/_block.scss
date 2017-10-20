@@ -1,7 +1,3 @@
 .icon-home {
-  @include sprite-width($s-icon-subway);
-}
-
-.icon-home {
   @include sprite($s-icon-subway);
 }
