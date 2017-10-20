@@ -20,6 +20,8 @@ const svgmin = require('gulp-svgmin');
 const cheerio = require('gulp-cheerio');
 const replace = require('gulp-replace');
 
+const spritesmith = require('gulp.spritesmith');
+
 // Start browserSync server
 gulp.task('browser-sync', function() {
   browserSync({
@@ -100,6 +102,21 @@ gulp.task('svg-sprite', function () {
     .pipe(gulp.dest('src/assets/images/'));
 });
 
+// sprite png
+gulp.task('sprite', function() {
+  var spriteData;
+  spriteData = gulp.src('src/assets/images/sprite/*.png')
+  .pipe(spritesmith({
+    imgName: 'sprite.png',
+    cssName: 'sprite.scss',
+    padding: 5,
+    cssVarMap: function(sprite) {
+      sprite.name = "s-" + sprite.name;
+    },
+  }));
+  spriteData.img.pipe(gulp.dest('public/assets/images/'));
+  return spriteData.css.pipe(gulp.dest('src/assets/stylesheets/sprite'));
+});
 
 // css minify
 gulp.task('cssnano', function () {
