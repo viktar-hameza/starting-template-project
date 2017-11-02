@@ -26,6 +26,7 @@ const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
 const spritesmith = require('gulp.spritesmith');
 
+const newer = require('gulp-newer');
 const del = require('del');
 
 // Start browserSync server
@@ -190,6 +191,7 @@ gulp.task('copyImages', function() {
         'src/assets/images/**/*'
       ]
     )
+    .pipe(newer('public/assets/images/'))
     .pipe(imagemin({
       progressive: true,
       svgoPlugins: [{ removeViewBox: false }],
