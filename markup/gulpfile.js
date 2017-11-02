@@ -20,6 +20,14 @@ const svgmin = require('gulp-svgmin');
 const cheerio = require('gulp-cheerio');
 const replace = require('gulp-replace');
 
+const buffer = require('vinyl-buffer');
+const merge = require('merge-stream');
+const imagemin = require('gulp-imagemin');
+const pngquant = require('imagemin-pngquant');
+const spritesmith = require('gulp.spritesmith');
+
+const del = require('del');
+
 // Start browserSync server
 gulp.task('browser-sync', function() {
   browserSync({
@@ -100,6 +108,32 @@ gulp.task('svg-sprite', function () {
     .pipe(gulp.dest('src/assets/images/'));
 });
 
+// sprite png
+gulp.task('sprite', function() {
+
+  let spriteData = gulp.src('src/assets/images/sprite/*.png')
+    .pipe(spritesmith({
+      // retinaSrcFilter: ['src/assets/images/sprite/*@2x.png'], //for retina @2x
+      imgName: 'sprite.png',
+      // retinaImgName: 'sprite@2x.png', //for retina @2x
+      cssName: 'sprite.scss',
+      padding: 5,
+      cssVarMap: function(sprite) {
+        sprite.name = sprite.name;
+      },
+      imgPath: '../images/sprite.png',
+      // retinaImgPath: '../images/sprite@2x.png' //for retina @2x
+  }));
+  let imgStream = spriteData.img
+    .pipe(buffer())
+    .pipe(imagemin({
+      use: [pngquant()]
+    }))
+    .pipe(gulp.dest('public/assets/images/'));
+  let cssStream = spriteData.css
+    .pipe(gulp.dest('src/assets/stylesheets/sprite/'));
+  return merge(imgStream, cssStream);
+});
 
 // css minify
 gulp.task('cssnano', function () {
@@ -124,6 +158,11 @@ gulp.task('pug', function() {
     }))
     .pipe(gulp.dest('public/'))
     // .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('clean', function () {
+  console.log('---------- Очистка папки сборки');
+  return del(['public']);
 });
 
 //Copy JS
@@ -162,14 +201,15 @@ gulp.task('watch',['browser-sync'], function() {
               'src/templates/**/*.pug',
               'src/templates/**/*.html'], ['pug']);
   gulp.watch(['src/assets/images/sprite-svg/*.svg'], ['svg-sprite']);
+  gulp.watch(['src/assets/images/sprite/*.png'], ['sprite']);
   gulp.watch(['src/assets/fonts/*.*', 'src/assets/fonts/**/*.*'], ['copyFonts']);
   gulp.watch(['src/assets/scripts/*.*','src/assets/scripts/**/*.*'], ['copyJs']);
   gulp.watch(['src/assets/images/*.*', 'src/assets/images/**/*.*'], ['copyImages']);
   gulp.watch(['src/assets/temp/*.*', 'src/assets/temp/**/*.*'], ['copyTempPics']);
 });
 
-gulp.task('default', function(callback) {
+gulp.task('default', ['clean'], function(callback) {
   runSequence( 
-    ['styles', 'pug', 'svg-sprite', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics', 'watch'],
+    ['styles', 'pug', 'sprite', 'svg-sprite', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics', 'watch'],
     callback);
 });

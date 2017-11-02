@@ -188,5 +188,10 @@ strong {
   width: 34px; }
 
 /*Blocks*/
+.icon-home {
+  background-image: url(../images/sprite.png);
+  background-position: -37px 0px;
+  width: 16px;
+  height: 16px; }
 
 /*# sourceMappingURL=stylemaps/style.css.map */
