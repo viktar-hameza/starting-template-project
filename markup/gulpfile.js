@@ -202,12 +202,12 @@ gulp.task('copyImages', function() {
 
 // Copy temporary pictures
 gulp.task('copyTempPics', function() {
-    return gulp.src('./src/assets/temp/**/*')
+  return gulp.src(['src/assets/temp/**/*', '!src/assets/temp/README.md'])
     .pipe(gulp.dest('public/temp/'));
 });
 // Copy content
 gulp.task('copyContent', function () {
-  return gulp.src('./src/assets/content/**/*')
+  return gulp.src(['src/assets/content/**/*', '!src/assets/content/README.md'])
     .pipe(gulp.dest('public/assets/content'));
 });
 
