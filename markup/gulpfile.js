@@ -97,7 +97,7 @@ gulp.task('svg-sprite', function () {
           sprite: "../sprite.svg",
           render: {
             scss: {
-              dest: '../../stylesheets/sprite-svg/_sprite-svg.scss',
+              dest: '../../../../src/assets/stylesheets/sprite-svg/_sprite-svg.scss',
               template: 'src/assets/stylesheets/sprite-svg/_sprite-template.scss'
             }
           },
@@ -105,7 +105,7 @@ gulp.task('svg-sprite', function () {
         }
       }
     }))
-    .pipe(gulp.dest('src/assets/images/'));
+    .pipe(gulp.dest('public/assets/images/'));
 });
 
 // sprite png
@@ -161,7 +161,7 @@ gulp.task('pug', function() {
 });
 
 gulp.task('clean', function () {
-  console.log('---------- Очистка папки сборки');
+  console.log('---------- Clean');
   return del(['public']);
 });
 
@@ -180,7 +180,21 @@ gulp.task('copyFonts', function() {
 
 // Copy Images
 gulp.task('copyImages', function() {
-  return gulp.src('./src/assets/images/**/*')
+  return gulp.src(
+      [ 
+        '!src/assets/images/sprite/',
+        '!src/assets/images/sprite/**/*',
+        '!src/assets/images/sprite-svg/',
+        '!src/assets/images/sprite-svg/**/*',
+        // '!src/assets/images/sprite.svg',
+        'src/assets/images/**/*'
+      ]
+    )
+    .pipe(imagemin({
+      progressive: true,
+      svgoPlugins: [{ removeViewBox: false }],
+      use: [pngquant()]
+    }))
     .pipe(gulp.dest('public/assets/images/'));
 });
 
@@ -188,6 +202,11 @@ gulp.task('copyImages', function() {
 gulp.task('copyTempPics', function() {
     return gulp.src('./src/assets/temp/**/*')
     .pipe(gulp.dest('public/temp/'));
+});
+// Copy content
+gulp.task('copyContent', function () {
+  return gulp.src('./src/assets/content/**/*')
+    .pipe(gulp.dest('public/assets/content'));
 });
 
 // Watch taskes
@@ -206,10 +225,13 @@ gulp.task('watch',['browser-sync'], function() {
   gulp.watch(['src/assets/scripts/*.*','src/assets/scripts/**/*.*'], ['copyJs']);
   gulp.watch(['src/assets/images/*.*', 'src/assets/images/**/*.*'], ['copyImages']);
   gulp.watch(['src/assets/temp/*.*', 'src/assets/temp/**/*.*'], ['copyTempPics']);
+  gulp.watch(['src/assets/content/*.*', 'src/assets/content/**/*.*'], ['copyContent']);
 });
 
-gulp.task('default', ['clean'], function(callback) {
-  runSequence( 
-    ['styles', 'pug', 'sprite', 'svg-sprite', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics', 'watch'],
+gulp.task('default', function(callback) {
+  runSequence(
+    'clean',
+    ['svg-sprite', 'sprite'],
+    ['styles', 'pug', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics','copyContent', 'watch'],
     callback);
 });
