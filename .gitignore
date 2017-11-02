@@ -33,6 +33,7 @@ Thumbs.db
 .hg
 .idea
 .svn
+.vscode
 bower_components
 
 # Node.JS
