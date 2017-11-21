@@ -29,6 +29,11 @@ const spritesmith = require('gulp.spritesmith');
 const newer = require('gulp-newer');
 const del = require('del');
 
+const pugInheritance = require('gulp-pug-inheritance');
+const changed = require('gulp-changed');
+const cached = require('gulp-cached');
+const gulpif = require('gulp-if');
+const filter = require('gulp-filter');
 // Start browserSync server
 gulp.task('browser-sync', function() {
   browserSync({
@@ -146,8 +151,23 @@ gulp.task('cssnano', function () {
 });
 
 // Pug
-gulp.task('pug', function() {
-  return gulp.src('src/pages/*.pug')
+gulp.task('pug', function () {
+  return gulp.src('./src/templates/**/*.pug')
+
+    //only pass unchanged *main* files and *all* the partials
+    .pipe(changed('public', { extension: '.html' }))
+
+    //filter out unchanged partials, but it only works when watching
+    .pipe(gulpif(global.isWatching, cached('pug')))
+
+    //find files that depend on the files that have changed
+    .pipe(pugInheritance({ basedir: 'src/templates/.'}))
+
+    //filter out partials (folders and files starting with "_" )
+    .pipe(filter(function (file) {
+      return !/\/_/.test(file.path) && !/^_/.test(file.relative);
+    }))
+    //process pug templates
     .pipe(pug({
       pretty: true
     }))
@@ -157,8 +177,9 @@ gulp.task('pug', function() {
         message: err.message
       }
     }))
-    .pipe(gulp.dest('public/'))
-    // .pipe(browserSync.reload({stream: true}));
+    // save all the files
+
+    .pipe(gulp.dest('public'));
 });
 
 gulp.task('clean', function () {
@@ -211,14 +232,17 @@ gulp.task('copyContent', function () {
     .pipe(gulp.dest('public/assets/content'));
 });
 
+gulp.task('setWatch', function () {
+  global.isWatching = true;
+});
+
 // Watch taskes
-gulp.task('watch',['browser-sync'], function() {
+gulp.task('watch', ['setWatch', 'pug', 'browser-sync'], function() {
   gulp.watch(['src/assets/stylesheets/*.scss',
               'src/assets/stylesheets/**/*.scss',
               'src/assets/stylesheets/**/**/*.scss',
               'src/templates/**/*.scss'], ['styles']);
-  gulp.watch(['src/pages/*.pug',
-              'src/pages/**/*.pug',
+  gulp.watch(['src/*.pug', 
               'src/templates/**/*.pug',
               'src/templates/**/*.html'], ['pug']);
   gulp.watch(['src/assets/images/sprite-svg/*.svg'], ['svg-sprite']);

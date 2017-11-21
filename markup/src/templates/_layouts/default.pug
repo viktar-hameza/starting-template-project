@@ -1,6 +1,6 @@
 doctype html
-include ../vendor/bemto/bemto.pug
-include ../mixins/mixins
+include ../_vendor/bemto/bemto.pug
+include ../_mixins/mixins.pug
 
 - set_bemto_settings({ modifier: '--' })
 
@@ -12,15 +12,15 @@ block vars
 - var VIEWPORT_CONTENT = VIEWPORT_CONTENT || 'width=device-width, initial-scale=1, maximum-scale=1, minimal-ui';
 
 html(class=rootClasses)
-	head
-		include ../partials/head/head
-		block head
+  head
+    include ../_partials/head/head.pug
+    block head
 
-	body(class=bodyClasses)
-		block content
+  body(class=bodyClasses)
+    block content
 
-	block scripts
-		script(src='assets/scripts/vendor/jquery-2.2.4.min.js')
-		script(src='assets/scripts/tools.js')
-		
-	block extraScripts
+  block scripts
+    script(src='assets/scripts/vendor/jquery-2.2.4.min.js')
+    script(src='assets/scripts/tools.js')
+
+  block extraScripts
