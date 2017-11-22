@@ -97,6 +97,16 @@ To change the color(fill), remove all 'fill' in svg file
 ```
 
 ## PNG
+  ### PNG inline in css
+
+  Add png file in folder assets/images/..
+
+  ```CSS
+    .foo {
+      /* Input example */
+      background-image: url("https://placehold.it/10x10");
+    }
+  ```
   ### PNG-sprite
 
   Add png file in folder assets/images/sprite/
@@ -106,15 +116,5 @@ To change the color(fill), remove all 'fill' in svg file
       @include sprite($icon-subway);
   ```
 
-  ### PNG inline in css
-
-  Add png file in folder assets/images/..
-  
-  ```CSS
-    .foo {
-      /* Input example */
-      background-image: url("https://placehold.it/10x10");
-    }
-  ```
 
 
