@@ -54,7 +54,7 @@ Use the modifier syntax BEM of Nicolas Gallagher (block__element--modifier)
 ```
 
 ## SVG
-### Svg in Pug(html)
+### Svg-sprite in Pug(html)
 Add svg file in folder assets/images/sprite-svg/
 
 ```Pug
@@ -65,7 +65,7 @@ Add svg file in folder assets/images/sprite-svg/
 ```HTML
   <div class="test">
     <svg class="icon-svg icon-svg-vk">
-      <use xlink:href="assets/images/sprite.svg#vk"></use>
+      <use xlink:href="assets/images/sprite-svg/sprite.svg#vk"></use>
     </svg>
   </div>
 ```
@@ -74,7 +74,7 @@ Add svg file in folder assets/images/..
 
 ```CSS
   .up {
-    background: svg-load('../images/arrow-up.svg');
+    background: svg-load('../images/svg/arrow-up.svg');
   }
 ```
 
@@ -95,5 +95,26 @@ To change the color(fill), remove all 'fill' in svg file
     background: svg-load('../images/arrow-up.svg', fill=#000, stroke=#fff);
   }
 ```
+
+## PNG
+  ### PNG-sprite
+
+  Add png file in folder assets/images/sprite/
+
+  ```CSS
+    .icon-home {
+      @include sprite($icon-subway);
+  ```
+
+  ### PNG inline in css
+
+  Add png file in folder assets/images/..
+  
+  ```CSS
+    .foo {
+      /* Input example */
+      background-image: url("https://placehold.it/10x10");
+    }
+  ```
 
 
