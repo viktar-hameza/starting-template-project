@@ -24,6 +24,10 @@ Builder has the following file structure:
 
 ```
 
+## Favicon
+
+[**Favicon Generator**](https://realfavicongenerator.net/)
+
 ## Fonts
 
 In the project, use the font format: woff, woff2
@@ -91,6 +95,5 @@ To change the color(fill), remove all 'fill' in svg file
     background: svg-load('../images/arrow-up.svg', fill=#000, stroke=#fff);
   }
 ```
-
 
 
