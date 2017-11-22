@@ -50,8 +50,7 @@ Use the modifier syntax BEM of Nicolas Gallagher (block__element--modifier)
 ```
 
 ## SVG
-
-# Svg in Pug(html)
+### Svg in Pug(html)
 Add svg file in folder assets/images/sprite-svg/
 
 ```Pug
@@ -66,7 +65,8 @@ Add svg file in folder assets/images/sprite-svg/
     </svg>
   </div>
 ```
-# Inline-svg in css
+### Inline-svg in css
+Add svg file in folder assets/images/..
 
 ```CSS
   .up {
