@@ -106,7 +106,7 @@ Add png file in folder assets/images/..
     /* Input example */
     background-image: url("https://placehold.it/10x10");
   }
-  ```
+```
 ### PNG-sprite
 
 Add png file in folder assets/images/sprite/
