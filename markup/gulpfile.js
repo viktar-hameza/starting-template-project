@@ -35,7 +35,7 @@ const cached = require('gulp-cached');
 const gulpif = require('gulp-if');
 const filter = require('gulp-filter');
 // Start browserSync server
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
   browserSync({
     server: {
       baseDir: 'public',
@@ -48,12 +48,12 @@ gulp.task('browser-sync', function() {
 
 // postcss plugins
 let postCssPlugins = [
-  autoprefixer({browsers: ['> 1%'], cascade: false}),
+  autoprefixer({ browsers: ['> 1%'], cascade: false }),
   inlinesvg(),
   svgo(),
   objectFitImages(),
   imageInliner({
-    assetPaths: ['src/assets/images/', 'src/assets/images/**/*' ],
+    assetPaths: ['src/assets/images/', 'src/assets/images/**/*'],
     maxFileSize: 10240
   })
 ];
@@ -62,23 +62,23 @@ let postCssPlugins = [
 gulp.task('styles', function () {
   return gulp.src('src/assets/stylesheets/*.scss')
     .pipe(sourcemaps.init())
-      .pipe(sass())
-      .on('error', notify.onError(function(err){
-        return {
-          title: 'Styles compilation error',
-          message: err.message
-        }
-      }))
+    .pipe(sass())
+    .on('error', notify.onError(function (err) {
+      return {
+        title: 'Styles compilation error',
+        message: err.message
+      }
+    }))
     .pipe(postcss(postCssPlugins))
     .pipe(sourcemaps.write('./stylemaps'))
     .pipe(gulp.dest('public/assets/stylesheets'))
-    .pipe(browserSync.reload({stream: true}));
+    .pipe(browserSync.reload({ stream: true }));
 });
 
 // svg-sprite for html(pug)
 gulp.task('svg-sprite', function () {
   return gulp.src('src/assets/images/sprite-svg/*.svg')
-  // minify svg
+    // minify svg
     .pipe(svgmin({
       js2svg: {
         pretty: true
@@ -92,7 +92,7 @@ gulp.task('svg-sprite', function () {
         // $('[defs]').removeAttr('defs');
         // $('[style]').removeAttr('style');
       },
-      parserOptions: {xmlMode: true}
+      parserOptions: { xmlMode: true }
     }))
     // cheerio plugin create unnecessary string '&gt;', so replace it.
     .pipe(replace('&gt;', '>'))
@@ -115,7 +115,7 @@ gulp.task('svg-sprite', function () {
 });
 
 // sprite png
-gulp.task('sprite', function() {
+gulp.task('sprite', function () {
 
   let spriteData = gulp.src('src/assets/images/sprite/*.png')
     .pipe(spritesmith({
@@ -124,12 +124,12 @@ gulp.task('sprite', function() {
       // retinaImgName: 'sprite@2x.png', //for retina @2x
       cssName: 'sprite.scss',
       padding: 5,
-      cssVarMap: function(sprite) {
+      cssVarMap: function (sprite) {
         sprite.name = sprite.name;
       },
       imgPath: '../images/sprite.png',
       // retinaImgPath: '../images/sprite@2x.png' //for retina @2x
-  }));
+    }));
   let imgStream = spriteData.img
     .pipe(buffer())
     .pipe(imagemin({
@@ -152,26 +152,27 @@ gulp.task('cssnano', function () {
 
 // Pug
 gulp.task('pug', function () {
-  return gulp.src('./src/templates/**/*.pug')
+  return gulp.src('./src/templates/*.pug')
+    // return gulp.src('./src/templates/**/*.pug')
 
-    //only pass unchanged *main* files and *all* the partials
+    /* //only pass unchanged *main* files and *all* the partials
     .pipe(changed('public', { extension: '.html' }))
 
     //filter out unchanged partials, but it only works when watching
     .pipe(gulpif(global.isWatching, cached('pug')))
 
     //find files that depend on the files that have changed
-    .pipe(pugInheritance({ basedir: 'src/templates/.'}))
+    .pipe(pugInheritance({ basedir: 'src/templates/.' }))
 
     //filter out partials (folders and files starting with "_" )
     .pipe(filter(function (file) {
       return !/\/_/.test(file.path) && !/^_/.test(file.relative);
-    }))
+    })) */
     //process pug templates
     .pipe(pug({
       pretty: true
     }))
-    .on('error', notify.onError(function(err){
+    .on('error', notify.onError(function (err) {
       return {
         title: 'Pug compilation error',
         message: err.message
@@ -179,7 +180,8 @@ gulp.task('pug', function () {
     }))
     // save all the files
 
-    .pipe(gulp.dest('public'));
+    .pipe(gulp.dest('public'))
+    .pipe(browserSync.reload({ stream: true }));
 });
 
 gulp.task('clean', function () {
@@ -188,30 +190,45 @@ gulp.task('clean', function () {
 });
 
 //Copy JS
-gulp.task('copyJs', function() {
+gulp.task('copyJs', function () {
   return gulp.src(['./src/assets/scripts/*vendor/**/*',
-      './src/assets/scripts/*.js'])
+    './src/assets/scripts/*.js'])
     .pipe(gulp.dest('public/assets/scripts/'));
 });
 
 // Copy Fonts
-gulp.task('copyFonts', function() {
+gulp.task('copyFonts', function () {
   return gulp.src('./src/assets/fonts/**/*')
     .pipe(gulp.dest('public/assets/fonts/'));
 });
 
 // Copy Images
-gulp.task('copyImages', function() {
+gulp.task('copyImages', function () {
   return gulp.src(
-      [ 
-        '!src/assets/images/sprite/',
-        '!src/assets/images/sprite/**/*',
-        '!src/assets/images/sprite-svg/',
-        '!src/assets/images/sprite-svg/**/*',
-        // '!src/assets/images/sprite.svg',
-        'src/assets/images/**/*'
-      ]
-    )
+    [
+      '!src/assets/images/sprite/',
+      '!src/assets/images/sprite/**/*',
+      '!src/assets/images/sprite-svg/',
+      '!src/assets/images/sprite-svg/**/*',
+      // '!src/assets/images/sprite.svg',
+      'src/assets/images/**/*'
+    ]
+  )
+    .pipe(gulp.dest('public/assets/images/'));
+});
+
+// Optimization Images
+gulp.task('optimizationImages', function () {
+  return gulp.src(
+    [
+      '!src/assets/images/sprite/',
+      '!src/assets/images/sprite/**/*',
+      '!src/assets/images/sprite-svg/',
+      '!src/assets/images/sprite-svg/**/*',
+      // '!src/assets/images/sprite.svg',
+      'src/assets/images/**/*'
+    ]
+  )
     .pipe(newer('public/assets/images/'))
     .pipe(imagemin({
       progressive: true,
@@ -222,7 +239,7 @@ gulp.task('copyImages', function() {
 });
 
 // Copy temporary pictures
-gulp.task('copyTempPics', function() {
+gulp.task('copyTempPics', function () {
   return gulp.src(['src/assets/temp/**/*', '!src/assets/temp/README.md'])
     .pipe(gulp.dest('public/temp/'));
 });
@@ -237,27 +254,35 @@ gulp.task('setWatch', function () {
 });
 
 // Watch taskes
-gulp.task('watch', ['setWatch', 'pug', 'browser-sync'], function() {
+gulp.task('watch', ['setWatch', 'pug', 'browser-sync'], function () {
   gulp.watch(['src/assets/stylesheets/*.scss',
-              'src/assets/stylesheets/**/*.scss',
-              'src/assets/stylesheets/**/**/*.scss',
-              'src/templates/**/*.scss'], ['styles']);
-  gulp.watch(['src/*.pug', 
-              'src/templates/**/*.pug',
-              'src/templates/**/*.html'], ['pug']);
+    'src/assets/stylesheets/**/*.scss',
+    'src/assets/stylesheets/**/**/*.scss',
+    'src/templates/**/*.scss'], ['styles']);
+  gulp.watch(['src/templates/*',
+    'src/templates/**/*.pug',
+    'src/templates/**/*.html'], ['pug']);
   gulp.watch(['src/assets/images/sprite-svg/*.svg'], ['svg-sprite']);
   gulp.watch(['src/assets/images/sprite/*.png'], ['sprite']);
   gulp.watch(['src/assets/fonts/*.*', 'src/assets/fonts/**/*.*'], ['copyFonts']);
-  gulp.watch(['src/assets/scripts/*.*','src/assets/scripts/**/*.*'], ['copyJs']);
+  gulp.watch(['src/assets/scripts/*.*', 'src/assets/scripts/**/*.*'], ['copyJs']);
   gulp.watch(['src/assets/images/*.*', 'src/assets/images/**/*.*'], ['copyImages']);
   gulp.watch(['src/assets/temp/*.*', 'src/assets/temp/**/*.*'], ['copyTempPics']);
   gulp.watch(['src/assets/content/*.*', 'src/assets/content/**/*.*'], ['copyContent']);
 });
 
-gulp.task('default', function(callback) {
+gulp.task('default', function (callback) {
+  runSequence(
+    // 'clean',
+    ['svg-sprite', 'sprite'],
+    ['styles', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics', 'copyContent', 'pug', 'watch'],
+    callback);
+});
+
+gulp.task('build', function (callback) {
   runSequence(
     'clean',
     ['svg-sprite', 'sprite'],
-    ['styles', 'pug', 'copyFonts', 'copyJs', 'copyImages', 'copyTempPics','copyContent', 'watch'],
+    ['styles', 'copyFonts', 'copyJs', 'optimizationImages', 'copyTempPics', 'copyContent', 'pug'],
     callback);
 });
