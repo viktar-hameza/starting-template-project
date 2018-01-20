@@ -1,4 +1,4 @@
-# Starting template project with gulp [![Build Status](https://travis-ci.org/viktar-hameza/starting-template-project.svg?branch=master)](https://travis-ci.org/viktar-hameza/starting-template-project) [![devDependencies Status](https://david-dm.org/viktar-hameza/starting-template-project/dev-status.svg)](https://david-dm.org/viktar-hameza/starting-template-project?type=dev) [![dependencies Status](https://david-dm.org/viktar-hameza/starting-template-project/status.svg)](https://david-dm.org/viktar-hameza/starting-template-project)
+# Template project (gulp) [![Build Status](https://travis-ci.org/viktar-hameza/starting-template-project.svg?branch=master)](https://travis-ci.org/viktar-hameza/starting-template-project) [![devDependencies Status](https://david-dm.org/viktar-hameza/starting-template-project/dev-status.svg)](https://david-dm.org/viktar-hameza/starting-template-project?type=dev) [![dependencies Status](https://david-dm.org/viktar-hameza/starting-template-project/status.svg)](https://david-dm.org/viktar-hameza/starting-template-project)
 
 <table>
   <thead>
@@ -17,7 +17,7 @@
       <td>Run the build, server, and file tracking</td>
     </tr>
     <tr>
-      <td><code>npm build</code></td>
+      <td><code>npm run build</code></td>
       <td>-</td>
     </tr>
     <tr>
