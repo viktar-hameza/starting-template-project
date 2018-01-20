@@ -1,3 +1,13 @@
 .icon-home {
   @include sprite($icon-subway);
 }
+.icon-inliner {
+  background: url(../images/bg-img/icon-subway.png);
+  width: 16px;
+  height: 16px;
+}
+.icon-svg-in-css {
+  background: svg-load('../images/vk.svg');
+  width: 34px;
+  height: 34px;
+}

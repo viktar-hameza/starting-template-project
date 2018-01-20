@@ -97,9 +97,9 @@ To change the color(fill), remove all 'fill' in svg file
 ```
 
 ## PNG
-### PNG inline in css
+### PNG inline in css (max 5 by)
 
-Add png file in folder assets/images/..
+Add png file in folder assets/images/bg-img/
 
 ```CSS
   .foo {

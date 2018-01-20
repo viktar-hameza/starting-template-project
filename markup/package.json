@@ -42,7 +42,7 @@
     "gulp.spritesmith": "^6.5.1",
     "imagemin-pngquant": "^5.0.1",
     "merge-stream": "^1.0.1",
-    "postcss-image-inliner": "^1.0.6",
+    "postcss-image-inliner": "^2.0.0",
     "postcss-inline-svg": "^3.0.0",
     "postcss-object-fit-images": "^1.1.2",
     "postcss-svgo": "^2.1.6",
