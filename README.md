@@ -18,7 +18,7 @@
     </tr>
     <tr>
       <td><code>npm run build</code></td>
-      <td>-</td>
+      <td>Build the project for production</td>
     </tr>
     <tr>
       <td><code>npm run deploy</code></td>
