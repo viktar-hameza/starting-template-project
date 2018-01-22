@@ -1,31 +1,13 @@
 # Template project (gulp) [![Build Status](https://travis-ci.org/viktar-hameza/starting-template-project.svg?branch=master)](https://travis-ci.org/viktar-hameza/starting-template-project) [![devDependencies Status](https://david-dm.org/viktar-hameza/starting-template-project/dev-status.svg)](https://david-dm.org/viktar-hameza/starting-template-project?type=dev) [![dependencies Status](https://david-dm.org/viktar-hameza/starting-template-project/status.svg)](https://david-dm.org/viktar-hameza/starting-template-project)
 
-<table>
-  <thead>
-    <tr>
-      <th>Command</th>
-      <th>Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td width="22%"><code>npm i</code></td>
-      <td>Install dependencies</td>
-    </tr>
-    <tr>
-      <td><code>npm start</code></td>
-      <td>Run the build, server, and file tracking</td>
-    </tr>
-    <tr>
-      <td><code>npm run build</code></td>
-      <td>Build the project for production</td>
-    </tr>
-    <tr>
-      <td><code>npm run deploy</code></td>
-      <td>-</td>
-    </tr>
-  </tbody>
-</table>
+Node.js version = 8.9.4
+
+| Command | Result |
+| ------ | ------ |
+| npm i | Install dependencies |
+| npm start | Run the build, server, and file tracking |
+| npm run build | Build the project for production [PlGd] |
+| npm run deploy | --- |
 
 # File structure
 
