@@ -191,12 +191,31 @@ gulp.task('clean', function () {
 });
 
 //Copy JS
-gulp.task('copyJs', function () {
-  return gulp.src(['./src/assets/scripts/*vendor/**/*',
-    './src/assets/scripts/*.js'])
-    .pipe(gulp.dest('public/assets/scripts/'));
-});
+// gulp.task('copyJs', function () {
+//   return gulp.src(['./src/assets/scripts/*vendor/**/*',
+//     './src/assets/scripts/*.js',
+//     "./node_modules/jquery/dist/jquery.min.js",
+//     "./node_modules/jquery-migrate/dist/jquery-migrate.min.js",
+//     "./node_modules/svg4everybody/dist/svg4everybody.js"])
+//     .pipe(gulp.dest('public/assets/scripts/'));
+// });
 
+gulp.task('copyJs', function () {
+  let NpmJs = gulp.src(["./node_modules/jquery/dist/jquery.min.js",
+    "./node_modules/jquery-migrate/dist/jquery-migrate.min.js",
+    "./node_modules/svg4everybody/dist/svg4everybody.js"])
+    .pipe(rename({
+      basename: "vendor-min.js"
+    }))
+    .pipe(concat())
+    .pipe(gulp.dest('public/assets/scripts/vendor'));
+  let VendorJs = gulp.src(['./src/assets/scripts/vendor/*',
+    "./node_modules/svg4everybody/dist/svg4everybody.js"])
+    .pipe(gulp.dest('public/assets/scripts/vendor'));
+  let MainJs = gulp.src(['./src/assets/scripts/*.js', '!./src/assets/scripts/vendor/*'])
+    // .pipe(concat())
+    .pipe(gulp.dest('public/assets/scripts/'));
+ });
 // Copy Fonts
 gulp.task('copyFonts', function () {
   return gulp.src('./src/assets/fonts/**/*')
