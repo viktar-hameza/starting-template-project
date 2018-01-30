@@ -34,6 +34,8 @@ const changed = require('gulp-changed');
 const cached = require('gulp-cached');
 const gulpif = require('gulp-if');
 const filter = require('gulp-filter');
+const rename = require('gulp-rename');
+const concat = require('gulp-concat');
 // Start browserSync server
 gulp.task('browser-sync', function () {
   browserSync({
@@ -204,10 +206,11 @@ gulp.task('copyJs', function () {
   let NpmJs = gulp.src(["./node_modules/jquery/dist/jquery.min.js",
     "./node_modules/jquery-migrate/dist/jquery-migrate.min.js",
     "./node_modules/svg4everybody/dist/svg4everybody.js"])
-    .pipe(rename({
-      basename: "vendor-min.js"
-    }))
-    .pipe(concat())
+    // .pipe(concat(vendor.min.js))
+    // .pipe(rename({
+    //   basename: "vendor.min.js"
+    // }))
+    
     .pipe(gulp.dest('public/assets/scripts/vendor'));
   let VendorJs = gulp.src(['./src/assets/scripts/vendor/*',
     "./node_modules/svg4everybody/dist/svg4everybody.js"])
