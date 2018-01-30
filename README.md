@@ -6,7 +6,7 @@ Node.js version = 8.9.4
 | ------ | ------ |
 | npm i | Install dependencies |
 | npm start | Run the build, server, and file tracking |
-| npm run build | Build the project for production [PlGd] |
+| npm run build | Build the project for production |
 | npm run deploy | --- |
 
 # File structure
