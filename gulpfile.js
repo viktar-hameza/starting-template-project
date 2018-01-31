@@ -55,7 +55,9 @@ let postCssPlugins = [
   svgo(),
   objectFitImages(),
   imageInliner({
-    assetPaths: ['src/assets/images/bg-img'],
+    assetPaths: [
+      'src/assets/images/bg-img/',
+    ],
     // Инлайнятся только картинки менее 5 Кб.
     maxFileSize: 5120
   })
@@ -206,6 +208,7 @@ gulp.task('copyJs', function () {
   let NpmJs = gulp.src(["./node_modules/jquery/dist/jquery.min.js",
     "./node_modules/jquery-migrate/dist/jquery-migrate.min.js",
     "./node_modules/svg4everybody/dist/svg4everybody.js"])
+    // .pipe(concat('vendor.min.js'))
     // .pipe(concat(vendor.min.js))
     // .pipe(rename({
     //   basename: "vendor.min.js"
