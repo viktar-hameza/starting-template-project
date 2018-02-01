@@ -2,7 +2,7 @@
   @include sprite($icon-subway);
 }
 .icon-inliner {
-  background: url(icon-subway.png);
+  background-image: url("icon-subway.png");
   width: 16px;
   height: 16px;
 }

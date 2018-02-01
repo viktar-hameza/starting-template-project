@@ -115,7 +115,7 @@ Add png file in folder assets/images/bg-img/
 ```CSS
   .foo {
     /* Input example */
-    background-image: url("https://placehold.it/10x10");
+    background-image: url("icon-subway.png");
   }
 ```
 ### PNG-sprite
