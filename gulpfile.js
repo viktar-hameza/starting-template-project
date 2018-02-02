@@ -38,6 +38,10 @@ const rename = require('gulp-rename');
 const concat = require('gulp-concat');
 
 const babel = require('gulp-babel');
+
+
+let projectConfig = require('./projectConfig.json');
+
 // Start browserSync server
 gulp.task('browser-sync', function () {
   browserSync({
@@ -207,20 +211,14 @@ gulp.task('clean', function () {
 // });
 
 gulp.task('copyJs', function () {
-  let concatVendorJs = gulp.src(["./node_modules/jquery/dist/jquery.min.js",
-    "./node_modules/jquery-migrate/dist/jquery-migrate.min.js",
-    "./node_modules/svg4everybody/dist/svg4everybody.js"])
+  let concatVendorJs = gulp.src(projectConfig.concatVendorJs)
     .pipe(concat('vendor.min.js'))
-    // .pipe(concat(vendor.min.js))
-    // .pipe(rename({
-    //   basename: "vendor.min.js"
-    // }))
-    
     .pipe(gulp.dest('public/assets/scripts'));
-  let noConcatJs = gulp.src(['src/assets/scripts/vendor/*',
-    "./node_modules/svg4everybody/dist/svg4everybody.js"])
+
+  let noConcatJs = gulp.src(projectConfig.noConcatJs)
     .pipe(gulp.dest('public/assets/scripts/'));
-  let MainJs = gulp.src(['src/assets/scripts/*'])
+
+  let MainJs = gulp.src(projectConfig.mainJs)
     .pipe(babel({
       presets: ['babel-preset-es2015']
     }))
@@ -296,7 +294,7 @@ gulp.task('watch', ['setWatch', 'pug', 'browser-sync'], function () {
   gulp.watch(['src/assets/images/sprite-svg/*.svg'], ['svg-sprite']);
   gulp.watch(['src/assets/images/sprite/*.png'], ['sprite']);
   gulp.watch(['src/assets/fonts/*.*', 'src/assets/fonts/**/*.*'], ['copyFonts']);
-  // gulp.watch(['src/assets/scripts/*.*', 'src/assets/scripts/**/*.*'], ['copyJs']);
+  gulp.watch(['src/assets/scripts/*', 'src/assets/scripts/**/*'], ['copyJs']);
   gulp.watch(['src/assets/images/*.*', 'src/assets/images/**/*.*'], ['copyImages']);
   gulp.watch(['src/assets/temp/*.*', 'src/assets/temp/**/*.*'], ['copyTempPics']);
   gulp.watch(['src/assets/content/*.*', 'src/assets/content/**/*.*'], ['copyContent']);
