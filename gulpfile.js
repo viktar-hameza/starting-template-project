@@ -37,10 +37,37 @@ const filter = require('gulp-filter');
 const rename = require('gulp-rename');
 const concat = require('gulp-concat');
 
+const gutil = require('gulp-util');
+const ftp = require('vinyl-ftp');
+
 const babel = require('gulp-babel');
 
 
 let projectConfig = require('./projectConfig.json');
+
+
+gulp.task('deploy', function () {
+
+  let conn = ftp.create({
+    host: '#',
+    user: '#',
+    password: '#',
+    parallel: 3,
+    log: gutil.log
+  });
+
+  let globs = [
+    'public/**'
+  ];
+
+  // using base = '.' will transfer everything to /public_html correctly
+  // turn off buffering in gulp.src for best performance
+
+  return gulp.src(globs, { base: '.', buffer: false })
+    .pipe(conn.newer('/www/helloworld.by/ptest')) // only upload newer files
+    .pipe(conn.dest('/www/helloworld.by/ptest'));
+
+});
 
 // Start browserSync server
 gulp.task('browser-sync', function () {
