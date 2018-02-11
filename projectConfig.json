@@ -1,4 +1,11 @@
 {
+  "ftp": {
+    "host": "mywebsite.by",
+    "user": "me",
+    "password": "mypass",
+    "localPathProject": "public/**",
+    "hostBasePath": "/www/helloworld.by/ptest"
+  },
   "mainJs": [
     "src/assets/scripts/*"
   ],

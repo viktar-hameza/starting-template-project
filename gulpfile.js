@@ -49,23 +49,23 @@ let projectConfig = require('./projectConfig.json');
 gulp.task('deploy', function () {
 
   let conn = ftp.create({
-    host: '#',
-    user: '#',
-    password: '#',
-    parallel: 3,
+    host: 'projectConfig.ftp.host',
+    user: 'projectConfig.ftp.user',
+    password: 'projectConfig.ftp.password',
+    parallel: 5,
     log: gutil.log
   });
 
   let globs = [
-    'public/**'
+    projectConfig.ftp.localPathProject
   ];
 
   // using base = '.' will transfer everything to /public_html correctly
   // turn off buffering in gulp.src for best performance
 
   return gulp.src(globs, { base: '.', buffer: false })
-    .pipe(conn.newer('/www/helloworld.by/ptest')) // only upload newer files
-    .pipe(conn.dest('/www/helloworld.by/ptest'));
+    .pipe(conn.newer(projectConfig.ftp.hostBasePath)) // only upload newer files
+    .pipe(conn.dest(projectConfig.ftp.hostBasePath));
 
 });
 
