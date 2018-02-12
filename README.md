@@ -45,10 +45,13 @@ Create file **project-ftp.json**
   "user": "username",
   "password": "password",
   "localPathProject": [
-        "public/assets/images/**",
-        "public/assets/content/**",
-        "public/assets/temp/**",
-        "public/**"
+    "public/assets/fonts/**",
+    "public/assets/images/**",
+    "public/assets/temp/**",
+    "public/assets/content/**",
+    "public/assets/scripts/**",
+    "public/assets/stylesheets/**",
+    "public/*"
   ],
   "hostBasePath": "/www/helloworld.by/projectName"
 }

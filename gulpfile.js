@@ -42,12 +42,11 @@ const ftp = require('vinyl-ftp');
 
 const babel = require('gulp-babel');
 
-
 let projectConfig = require('./project-config.json');
-let projectFtp = require('./project-ftp.json')
 
 gulp.task('deploy', function () {
-
+  let projectFtp = require('./project-ft.json');
+  
   let conn = ftp.create({
     host: projectFtp.host,
     user: projectFtp.user,
