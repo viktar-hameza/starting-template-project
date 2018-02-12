@@ -45,7 +45,7 @@ const babel = require('gulp-babel');
 let projectConfig = require('./project-config.json');
 
 gulp.task('deploy', function () {
-  let projectFtp = require('./project-ft.json');
+  let projectFtp = require('./project-ftp.json');
   
   let conn = ftp.create({
     host: projectFtp.host,
@@ -61,10 +61,23 @@ gulp.task('deploy', function () {
   // turn off buffering in gulp.src for best performance
 
   return gulp.src(globs, { base: '.', buffer: false })
-    .pipe(conn.newer(projectFtp.hostBasePath)) // only upload newer files
+    .pipe(conn.differentSize(projectFtp.hostBasePath)) // only upload newer files
     .pipe(conn.dest(projectFtp.hostBasePath));
 
 });
+
+gulp.task('ftp-clean',function () {
+    let projectFtp = require('./project-ftp.json');
+    var conn = ftp.create({
+      host: projectFtp.host,
+      user: projectFtp.user,
+      password: projectFtp.password,
+      parallel: 5,
+      log: gutil.log
+    });
+    return conn.clean(projectFtp.hostBasePath, projectFtp.hostBasePath, { base: '.' });
+  }
+);
 
 // Start browserSync server
 gulp.task('browser-sync', function () {
