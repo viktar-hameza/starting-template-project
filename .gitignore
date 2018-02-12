@@ -40,6 +40,7 @@ bower_components
 node_modules
 npm-debug.log
 package-lock.json
+project-ftp.json
 
 node_modules/
 public/

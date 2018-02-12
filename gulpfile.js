@@ -43,29 +43,27 @@ const ftp = require('vinyl-ftp');
 const babel = require('gulp-babel');
 
 
-let projectConfig = require('./projectConfig.json');
-
+let projectConfig = require('./project-config.json');
+let projectFtp = require('./project-ftp.json')
 
 gulp.task('deploy', function () {
 
   let conn = ftp.create({
-    host: 'projectConfig.ftp.host',
-    user: 'projectConfig.ftp.user',
-    password: 'projectConfig.ftp.password',
+    host: projectFtp.host,
+    user: projectFtp.user,
+    password: projectFtp.password,
     parallel: 5,
     log: gutil.log
   });
 
-  let globs = [
-    projectConfig.ftp.localPathProject
-  ];
+  let globs = projectFtp.localPathProject;
 
   // using base = '.' will transfer everything to /public_html correctly
   // turn off buffering in gulp.src for best performance
 
   return gulp.src(globs, { base: '.', buffer: false })
-    .pipe(conn.newer(projectConfig.ftp.hostBasePath)) // only upload newer files
-    .pipe(conn.dest(projectConfig.ftp.hostBasePath));
+    .pipe(conn.newer(projectFtp.hostBasePath)) // only upload newer files
+    .pipe(conn.dest(projectFtp.hostBasePath));
 
 });
 
