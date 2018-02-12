@@ -7,9 +7,9 @@ Node.js version = 8.9.4
 | npm i | Install dependencies |
 | npm start | Run the build, server, and file tracking |
 | npm run build | Build the project for production |
-| npm run deploy | --- |
+| npm run deploy | Deploy the project on server |
 
-# File structure
+## File structure
 
 Builder has the following file structure:
 
@@ -32,7 +32,26 @@ Builder has the following file structure:
         index.pug         # Page's templates
 ├── gulpfile.js           # gulpfile of builder
 ├── package.json          # Basic dependencies
+├── project-config.json   # Project path
+├── project-ftp.json      # Settings FTP path
 
+```
+
+## Settings FTP
+Create file **project-ftp.json**
+```json
+{
+  "host": "site.by",
+  "user": "username",
+  "password": "password",
+  "localPathProject": [
+        "public/assets/images/**",
+        "public/assets/content/**",
+        "public/assets/temp/**",
+        "public/**"
+  ],
+  "hostBasePath": "/www/helloworld.by/projectName"
+}
 ```
 
 ## Favicon
@@ -41,7 +60,7 @@ Builder has the following file structure:
 
 ## Fonts
 
-In the project, use the font format: woff, woff2
+In the project, use the font format: **woff, woff2**
 
 [**Online Font Converter**](https://onlinefontconverter.com/)
   
@@ -50,7 +69,7 @@ File naming Pug should be camelCase!!!
 
 Mixins for writing BEM-style code for [Pug](https://pugjs.org/), more syntax [Bemto](https://github.com/kizu/bemto)
 
-Use the modifier syntax BEM of Nicolas Gallagher (block__element--modifier)
+Use the modifier syntax BEM of Nicolas Gallagher **(block__element--modifier)**
 ```Pug
   +b.block1.--modifier
     +e.element1.--modifier1 Test
@@ -66,7 +85,7 @@ Use the modifier syntax BEM of Nicolas Gallagher (block__element--modifier)
 
 ## SVG
 ### Svg-sprite in Pug(html)
-Add svg file in folder assets/images/sprite-svg/
+Add svg file in folder **assets/images/sprite-svg/**
 
 ```Pug
   +b.test
@@ -81,7 +100,7 @@ Add svg file in folder assets/images/sprite-svg/
   </div>
 ```
 ### Inline-svg in css
-Add svg file in folder assets/images/..
+Add svg file in folder **assets/images/..**
 
 ```CSS
   .up {
@@ -120,7 +139,7 @@ Add png file in folder assets/images/bg-img/
 ```
 ### PNG-sprite
 
-Add png file in folder assets/images/sprite/
+Add png file in folder **assets/images/sprite/**
 
 ```CSS
   .icon-home {
