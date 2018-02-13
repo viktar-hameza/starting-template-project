@@ -60,7 +60,7 @@ gulp.task('deploy', function () {
   // using base = '.' will transfer everything to /public_html correctly
   // turn off buffering in gulp.src for best performance
 
-  return gulp.src(globs, { base: '.', buffer: false })
+  return gulp.src(globs, { base: './public', buffer: false })
     .pipe(conn.differentSize(projectFtp.hostBasePath)) // only upload newer files
     .pipe(conn.dest(projectFtp.hostBasePath));
 
@@ -75,7 +75,7 @@ gulp.task('ftp-clean',function () {
       parallel: 5,
       log: gutil.log
     });
-    return conn.clean(projectFtp.hostBasePath, projectFtp.hostBasePath, { base: '.' });
+  return conn.clean(projectFtp.hostBasePath, '.', { base: '.' });
   }
 );
 
