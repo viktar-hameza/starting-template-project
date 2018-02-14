@@ -43,38 +43,25 @@ const ftp = require('vinyl-ftp');
 const babel = require('gulp-babel');
 
 let projectConfig = require('./project-config.json');
-
+let projectFtp = require('./project-ftp.json');
+let objectFTP = {
+  host: projectFtp.host,
+  user: projectFtp.user,
+  password: projectFtp.password,
+  parallel: 5,
+  log: gutil.log
+}
 gulp.task('deploy', function () {
-  let projectFtp = require('./project-ftp.json');
-  
-  let conn = ftp.create({
-    host: projectFtp.host,
-    user: projectFtp.user,
-    password: projectFtp.password,
-    parallel: 5,
-    log: gutil.log
-  });
-
+  let conn = ftp.create(objectFTP);
   let globs = projectFtp.localPathProject;
-
-  // using base = '.' will transfer everything to /public_html correctly
-  // turn off buffering in gulp.src for best performance
-
   return gulp.src(globs, { base: './public', buffer: false })
-    .pipe(conn.differentSize(projectFtp.hostBasePath)) // only upload newer files
+    .pipe(conn.differentSize(projectFtp.hostBasePath))
     .pipe(conn.dest(projectFtp.hostBasePath));
 
 });
 
 gulp.task('ftp-clean',function () {
-    let projectFtp = require('./project-ftp.json');
-    var conn = ftp.create({
-      host: projectFtp.host,
-      user: projectFtp.user,
-      password: projectFtp.password,
-      parallel: 5,
-      log: gutil.log
-    });
+  let conn = ftp.create(objectFTP);
   return conn.clean(projectFtp.hostBasePath, '.', { base: '.' });
   }
 );
