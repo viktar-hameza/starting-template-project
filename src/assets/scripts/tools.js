@@ -1,3 +1,3 @@
 function My () {
-  let pety = 5;
+  let pety = 10;
 }

@@ -247,7 +247,7 @@ gulp.task('noConcatJs', function () {
 gulp.task('mainJs', function () {
   return gulp.src(projectConfig.mainJs)
     .pipe(babel({
-        presets: ['babel-preset-env']
+        presets: ['@babel/preset-env']
       }))
     .pipe(concat('tools.min.js'))
     .pipe(gulp.dest('public/assets/scripts/'));
