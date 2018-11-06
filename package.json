@@ -9,9 +9,6 @@
     "deploy": "gulp deploy"
   },
   "babel": {
-    "presets": [
-      "es2015"
-    ],
     "plugins": []
   },
   "repository": {
