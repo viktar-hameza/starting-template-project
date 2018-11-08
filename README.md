@@ -1,6 +1,6 @@
 # Template project (gulp) [![Build Status](https://travis-ci.org/viktar-hameza/starting-template-project.svg?branch=master)](https://travis-ci.org/viktar-hameza/starting-template-project) [![devDependencies Status](https://david-dm.org/viktar-hameza/starting-template-project/dev-status.svg)](https://david-dm.org/viktar-hameza/starting-template-project?type=dev) [![dependencies Status](https://david-dm.org/viktar-hameza/starting-template-project/status.svg)](https://david-dm.org/viktar-hameza/starting-template-project)
 
-Node.js version = 8.9.4
+Node.js version = 10.13.0
 
 | Command | Result |
 | ------ | ------ |
